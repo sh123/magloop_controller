@@ -8,9 +8,12 @@ CapCtrl::CapCtrl(int steps, int pin1, int pin2, int pin3, int pin4, int pinBtn)
   , pinBtn_(pinBtn)
   , pos_(0)
   , stepper_(steps, pin1, pin2, pin3, pin4)
+  , calPoints_(new CalPoint[ConfigCalPoints])
 {
   stepper_.setSpeed(ConfigSpeed);
   pinMode(pinBtn, INPUT_PULLUP);
+  
+  loadCalData();
 }
 
 void CapCtrl::setPos(int newPos)
@@ -72,7 +75,23 @@ void CapCtrl::release()
   digitalWrite(pin3_, LOW);
   digitalWrite(pin4_, LOW);
 }
- 
+
+void CapCtrl::saveCalData() 
+{
+  for (int i = 0; i < ConfigCalPoints; i++)
+  {
+    EEPROM.put(ConfigCalAddr + i * sizeof(CalPoint), calPoints_[i]);
+  }
+}
+
+void CapCtrl::loadCalData() 
+{
+  for (int i = 0; i < ConfigCalPoints; i++)
+  {
+    EEPROM.get(ConfigCalAddr + i * sizeof(CalPoint), calPoints_[i]);
+  }
+}
+
 void CapCtrl::calibrate(int freqKhz, int pos)
 {
   // go to position (or predefined positions)
