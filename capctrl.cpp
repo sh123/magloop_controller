@@ -18,7 +18,8 @@ CapCtrl::CapCtrl(int steps, int pin1, int pin2, int pin3, int pin4, int pinBtn)
 
 bool CapCtrl::setPos(int newPos)
 {
-  if (newPos == 0 || newPos > ConfigMaxPos) 
+  Serial.println(newPos);
+  if (newPos < 0 || newPos > ConfigMaxPos)
     return false;
   
   int dir = newPos > pos_ ? 1 : -1;
@@ -32,19 +33,22 @@ bool CapCtrl::setPos(int newPos)
   return true;
 }
 
-bool CapCtrl::setFreq(int freqKhz)
+bool CapCtrl::setFreq(long freqKhz)
 {
+  if (freqKhz == 0)
+    return false;
+    
   for (int i = 0; i < ConfigCalPoints - 1; i++) 
   {
-    int freqA = calPoints_[i].freqKhz;
-    int freqB = calPoints_[i + 1].freqKhz;
+    long freqA = calPoints_[i].freqKhz;
+    long freqB = calPoints_[i + 1].freqKhz;
 
     if (freqKhz >= freqA && freqKhz < freqB) 
     {
-        int posA = calPoints_[i].pos;
-        int posB = calPoints_[i + 1].pos;  
+        long posA = calPoints_[i].pos;
+        long posB = calPoints_[i + 1].pos;
 
-        int pos = (freqA * (freqB - freqKhz) + freqB * (freqKhz - freqA)) / (posB - posA);
+        long pos = (posA * (freqB - freqKhz) + posB * (freqKhz - freqA)) / (freqB - freqA);
 
         return setPos(pos);
     }
@@ -104,18 +108,18 @@ void CapCtrl::calLoad()
 }
 
 bool CapCtrl::calMove(int index)
-{
-  if (index >= 0 && index < ConfigMaxPos)   
-    return setPos(index * ConfigMaxPos / ConfigMaxPos);
+{ 
+  if (index >= 0 && index <= ConfigCalPoints)
+    return setPos((long)index * (long)ConfigMaxPos / ConfigCalPoints);
     
   return false;
 }
 
 bool CapCtrl::calStore(int index, int freqKhz)
 {
-  if (index >= 0 && index < ConfigMaxPos) 
+  if (index >= 0 && index < ConfigMaxPos)
   {
-    calPoints_[index].pos = index * ConfigMaxPos / ConfigMaxPos;
+    calPoints_[index].pos = (long)index * (long)ConfigMaxPos / ConfigCalPoints;
     calPoints_[index].freqKhz = freqKhz;
     
     return true;

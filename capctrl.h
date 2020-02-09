@@ -16,23 +16,22 @@ class CapCtrl
 public:
   CapCtrl(int steps, int pin1, int pin2, int pin3, int pin4, int pinBtn);
   
-  bool setFreq(int freqKhz);
+  bool setFreq(long freqKhz);
 
   bool calMove(int index);
   bool calStore(int index, int freqKhz);
-  
-  bool setPos(int newPos);
+  void calSave();
   
   void park();
   void up();
   void down();
 
 private:
+  bool setPos(int newPos);
   void releaseMotor();
-
-  void calLoad();
-  void calSave();
   
+  void calLoad();
+    
 private:
   const int ConfigSpeed = 64;
   const int ConfigStep = 100;

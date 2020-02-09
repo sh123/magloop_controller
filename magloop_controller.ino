@@ -12,30 +12,57 @@ void setup()
 {
   Serial.begin(9600);
   Serial.println("CapCtrl v1.0 RDY");
+
+  capCtrl.park();
 }
 
-void run_command(const String &cmd) 
+String readLine() 
 {
+  String result;
+
+  while (1) 
+  {
+    while (Serial.available()) 
+    {
+      char newChar = Serial.read(); 
+      if (newChar == '\n') 
+        return result;
+      else 
+        result += newChar;  
+    }
+    delay(100);
+  }
+}
+
+void runCommand(const String &cmd) 
+{
+  // down
   if (cmd == "d") 
   {
     capCtrl.down();
   }
+  // up
   else if (cmd == "u") 
   {
     capCtrl.up();
   }
+  // park
   else if (cmd == "p") 
   {
     capCtrl.park();
   }
+  // calibrate
+  else if (cmd == "c") 
+  {
+    runCalibration();
+  }
+  // go to frequency
   else 
   {
-    int pos = cmd.toInt();
-
-    if (pos != 0) 
-    {
-      capCtrl.setPos(pos); 
-    }
+    long freqKhz = cmd.toInt();
+    
+    if (!capCtrl.setFreq(freqKhz))
+      Serial.println("err");
   }
 }
 
@@ -46,7 +73,7 @@ void loop()
     char cmd = Serial.read(); 
     if (cmd == '\n') 
     {
-      run_command(currentCommand);
+      runCommand(currentCommand);
       currentCommand = "";
     }
     else 
@@ -54,4 +81,28 @@ void loop()
       currentCommand += cmd;  
     }
   }
+}
+
+void runCalibration()
+{
+  int i = 0;
+
+  Serial.println("cal:");
+  
+  while (capCtrl.calMove(i++))
+  {
+    Serial.println("freq?");
+    
+    int freqKhz = readLine().toInt();
+
+    if (capCtrl.calStore(i, freqKhz))
+      Serial.println("ok");
+    else
+      Serial.println("err");
+  }
+  
+  capCtrl.calSave();
+  Serial.println("done");
+  
+  capCtrl.park();
 }
