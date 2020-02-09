@@ -32,10 +32,24 @@ bool CapCtrl::setPos(int newPos)
   return true;
 }
 
-void CapCtrl::setFreq(int freqKhz)
+bool CapCtrl::setFreq(int freqKhz)
 {
-  // linearize, get position from frequency
-  // go_pos()
+  for (int i = 0; i < ConfigCalPoints - 1; i++) 
+  {
+    int freqA = calPoints_[i].freqKhz;
+    int freqB = calPoints_[i + 1].freqKhz;
+
+    if (freqKhz >= freqA && freqKhz < freqB) 
+    {
+        int posA = calPoints_[i].pos;
+        int posB = calPoints_[i + 1].pos;  
+
+        int pos = (freqA * (freqB - freqKhz) + freqB * (freqKhz - freqA)) / (posB - posA);
+
+        return setPos(pos);
+    }
+  }
+  return false;
 }
 
 void CapCtrl::park()
