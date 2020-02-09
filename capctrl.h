@@ -25,12 +25,12 @@ public:
   void down();
 
 private:
-  void release();
+  void releaseMotor();
 
-  void loadCalData();
-  void saveCalData();
-  
-  void calibrate(int freqKhz, int pos);
+  void calLoad();
+  void calSave();
+  bool calMove(int index);
+  bool calStore(int index, int freqKhz);
   
 private:
   const int ConfigSpeed = 64;

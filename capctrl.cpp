@@ -13,7 +13,7 @@ CapCtrl::CapCtrl(int steps, int pin1, int pin2, int pin3, int pin4, int pinBtn)
   stepper_.setSpeed(ConfigSpeed);
   pinMode(pinBtn, INPUT_PULLUP);
   
-  loadCalData();
+  calLoad();
 }
 
 void CapCtrl::setPos(int newPos)
@@ -27,7 +27,7 @@ void CapCtrl::setPos(int newPos)
     pos_ += dir;
     stepper_.step(-dir);
   }
-  release();
+  releaseMotor();
 }
 
 void CapCtrl::setFreq(int freqKhz)
@@ -43,7 +43,7 @@ void CapCtrl::park()
     stepper_.step(1);
   }
   stepper_.step(-ConfigStep);
-  release();
+  releaseMotor();
   
   pos_ = 0;
 }
@@ -54,7 +54,7 @@ void CapCtrl::up()
   {
     stepper_.step(-ConfigStep);
     pos_ += ConfigStep;
-    release();
+    releaseMotor();
   }
 }
 
@@ -64,11 +64,11 @@ void CapCtrl::down()
   {
     stepper_.step(ConfigStep);
     pos_ -= ConfigStep;
-    release();
+    releaseMotor();
   }
 }
     
-void CapCtrl::release()
+void CapCtrl::releaseMotor()
 {
   digitalWrite(pin1_, LOW);  
   digitalWrite(pin2_, LOW);
@@ -76,7 +76,7 @@ void CapCtrl::release()
   digitalWrite(pin4_, LOW);
 }
 
-void CapCtrl::saveCalData() 
+void CapCtrl::calSave() 
 {
   for (int i = 0; i < ConfigCalPoints; i++)
   {
@@ -84,7 +84,7 @@ void CapCtrl::saveCalData()
   }
 }
 
-void CapCtrl::loadCalData() 
+void CapCtrl::calLoad() 
 {
   for (int i = 0; i < ConfigCalPoints; i++)
   {
@@ -92,11 +92,25 @@ void CapCtrl::loadCalData()
   }
 }
 
-void CapCtrl::calibrate(int freqKhz, int pos)
+bool CapCtrl::calMove(int index)
 {
-  // go to position (or predefined positions)
-  // ask frequency from the user
-  // set frequency
-  // linearize
-  // store to eeprom
+  if (index >= 0 && index < ConfigMaxPos) {   
+    
+    setPos(index * ConfigMaxPos / ConfigMaxPos);
+    
+    return true;
+  }
+  return false;
+}
+
+bool CapCtrl::calStore(int index, int freqKhz)
+{
+  if (index >= 0 && index < ConfigMaxPos) {
+
+    calPoints_[index].pos = index * ConfigMaxPos / ConfigMaxPos;
+    calPoints_[index].freqKhz = freqKhz;
+    
+    return true;
+  }
+  return false;
 }
