@@ -11,7 +11,7 @@ CapCtrl capCtrl(STEPS, A2, A3, A4, A5, BTN_STOP);
 void setup() 
 {
   Serial.begin(9600);
-  Serial.println("Stepper test!");
+  Serial.println("CapCtrl v1.0 RDY");
 }
 
 void run_command(const String &cmd) 
