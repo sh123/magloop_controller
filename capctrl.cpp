@@ -16,9 +16,10 @@ CapCtrl::CapCtrl(int steps, int pin1, int pin2, int pin3, int pin4, int pinBtn)
   calLoad();
 }
 
-void CapCtrl::setPos(int newPos)
+bool CapCtrl::setPos(int newPos)
 {
-  if (newPos == 0 || newPos > ConfigMaxPos) return;
+  if (newPos == 0 || newPos > ConfigMaxPos) 
+    return false;
   
   int dir = newPos > pos_ ? 1 : -1;
   
@@ -28,6 +29,7 @@ void CapCtrl::setPos(int newPos)
     stepper_.step(-dir);
   }
   releaseMotor();
+  return true;
 }
 
 void CapCtrl::setFreq(int freqKhz)
@@ -39,9 +41,8 @@ void CapCtrl::setFreq(int freqKhz)
 void CapCtrl::park()
 {
   while (digitalRead(pinBtn_) == 0) 
-  {
     stepper_.step(1);
-  }
+
   stepper_.step(-ConfigStep);
   releaseMotor();
   
@@ -79,34 +80,27 @@ void CapCtrl::releaseMotor()
 void CapCtrl::calSave() 
 {
   for (int i = 0; i < ConfigCalPoints; i++)
-  {
     EEPROM.put(ConfigCalAddr + i * sizeof(CalPoint), calPoints_[i]);
-  }
 }
 
 void CapCtrl::calLoad() 
 {
   for (int i = 0; i < ConfigCalPoints; i++)
-  {
     EEPROM.get(ConfigCalAddr + i * sizeof(CalPoint), calPoints_[i]);
-  }
 }
 
 bool CapCtrl::calMove(int index)
 {
-  if (index >= 0 && index < ConfigMaxPos) {   
+  if (index >= 0 && index < ConfigMaxPos)   
+    return setPos(index * ConfigMaxPos / ConfigMaxPos);
     
-    setPos(index * ConfigMaxPos / ConfigMaxPos);
-    
-    return true;
-  }
   return false;
 }
 
 bool CapCtrl::calStore(int index, int freqKhz)
 {
-  if (index >= 0 && index < ConfigMaxPos) {
-
+  if (index >= 0 && index < ConfigMaxPos) 
+  {
     calPoints_[index].pos = index * ConfigMaxPos / ConfigMaxPos;
     calPoints_[index].freqKhz = freqKhz;
     

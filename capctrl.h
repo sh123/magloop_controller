@@ -17,10 +17,13 @@ public:
   CapCtrl(int steps, int pin1, int pin2, int pin3, int pin4, int pinBtn);
   
   void setFreq(int freqKhz);
+
+  bool calMove(int index);
+  bool calStore(int index, int freqKhz);
   
-  void setPos(int newPos);
+  bool setPos(int newPos);
+  
   void park();
-  
   void up();
   void down();
 
@@ -29,8 +32,6 @@ private:
 
   void calLoad();
   void calSave();
-  bool calMove(int index);
-  bool calStore(int index, int freqKhz);
   
 private:
   const int ConfigSpeed = 64;
