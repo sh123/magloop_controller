@@ -31,7 +31,7 @@ private:
   void releaseMotor();
   
   void calLoad();
-    
+
 private:
   const int ConfigSpeed = 64;
   const int ConfigStep = 100;
