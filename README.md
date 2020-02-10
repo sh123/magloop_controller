@@ -6,6 +6,7 @@ Magnetic loop antenna capacitor controller based on
  - 3d printed slide capacitor printed with PETG plastic
    - Plate sizes are 50x60 mm
    - Plate spacing 5 mm
+   - Worm gear is M3
    - Can handle 100W CW without arcing
    - Capacitance range ~3-95 pF
    - Can tune from ~9 up to 29 MHz with 0.9m loop
