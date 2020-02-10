@@ -15,7 +15,7 @@ Magnetic loop antenna capacitor controller based on
 
 # Serial commands
  - *p*: park to initial 0 position, automatically performed when powered on
- - *c*: start calibration procedure, each time capacitor goes into new position you need to type frequency where resonance occurs, calibration is done across 10 points and then linear interpolation is used to find position based on input frequency
+ - *c*: start calibration procedure, each time capacitor goes into new position you need to type frequency where resonance occurs, calibration is done across 10 points and then linear interpolation is used to find position based on input frequency, calibration points are stored in EEPROM after completion and loaded when powered on
  - *u*: go/tune up to higher frequency
  - *d*: go/tune down to lower frequency
  - *number*, frequency in kHz where to move capacitor, should be used after calibration procedure completion
