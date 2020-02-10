@@ -6,6 +6,7 @@ Magnetic loop antenna capacitor KISS (keep it simple stupid) controller based on
  - 3d printed slide capacitor printed with PETG plastic
    - Plate sizes are 50x60 mm
    - Plate spacing 5 mm
+   - 11 plates
    - Worm gear is M3
    - Can handle 100W CW without arcing (tested with 0.9m loop)
    - Capacitance range ~3-95 pF
