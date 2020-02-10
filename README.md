@@ -12,4 +12,4 @@ Magnetic loop antenna capacitor controller based on
  - *c*: start calibration procedure, each time capacitor goes into new position you need to type frequency where resonance occurs
  - *u*: go up to higher frequency
  - *d*: go down to lower frequency
- - *number*, frequency in kHz where to move capacitor
+ - *number*, frequency in kHz where to move capacitor, should be used after calibration procedure completion
