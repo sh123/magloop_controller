@@ -13,7 +13,7 @@ Magnetic loop antenna capacitor controller based on
 ![alt text](images/magloop.png)
 
 # Serial commands
- - *p*: park to initial 0 position
+ - *p*: park to initial 0 position, automatically performed when powered on
  - *c*: start calibration procedure, each time capacitor goes into new position you need to type frequency where resonance occurs, calibration is done across 10 points and then linear interpolation is used to find position based on input frequency
  - *u*: go/tune up to higher frequency
  - *d*: go/tune down to lower frequency
