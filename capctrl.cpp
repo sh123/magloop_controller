@@ -23,7 +23,6 @@ CapCtrl::~CapCtrl()
 
 bool CapCtrl::setPos(int newPos)
 {
-  Serial.println(newPos);
   if (newPos < 0 || newPos > ConfigMaxPos)
     return false;
   
