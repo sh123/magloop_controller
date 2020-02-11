@@ -3,6 +3,7 @@ Magnetic loop antenna capacitor KISS (keep it simple stupid) controller based on
  - Arduino Nano
  - L298N stepper driver
  - EM-290 stepper from Epson printer
+ - HC-06 bluetooth serial controller for remote control
  - 3d printed slide capacitor printed with PETG plastic
    - Plate sizes are 50x60 mm
    - Plate spacing 5 mm
