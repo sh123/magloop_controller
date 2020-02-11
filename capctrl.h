@@ -15,6 +15,7 @@ class CapCtrl
   
 public:
   CapCtrl(int steps, int pin1, int pin2, int pin3, int pin4, int pinBtn);
+  ~CapCtrl();
   
   bool setFreq(long freqKhz);
 
