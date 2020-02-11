@@ -16,6 +16,11 @@ CapCtrl::CapCtrl(int steps, int pin1, int pin2, int pin3, int pin4, int pinBtn)
   calLoad();
 }
 
+CapCtrl::~CapCtrl() 
+{
+  delete[] calPoints_;
+}
+
 bool CapCtrl::setPos(int newPos)
 {
   Serial.println(newPos);
