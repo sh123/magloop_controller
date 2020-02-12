@@ -16,6 +16,7 @@ Magnetic loop antenna capacitor KISS (keep it simple stupid) controller based on
 ![alt text](images/magloop.png)
 
 # Serial commands
+On successful command execution "ok" is returned when operation was successfully completed or "err" if command was unsuccessful. Next commands are supported:
  - *p*: park to initial 0 position, automatically performed when powered on
  - *c*: start calibration procedure, each time capacitor goes into new position you need to type frequency where resonance occurs, calibration is done across 10 points and then linear interpolation is used to find position based on input frequency, calibration points are stored in EEPROM after completion and loaded when powered on
  - *u*: go/tune up to higher frequency
