@@ -21,3 +21,10 @@ Magnetic loop antenna capacitor KISS (keep it simple stupid) controller based on
  - *u*: go/tune up to higher frequency
  - *d*: go/tune down to lower frequency
  - *number*, frequency in kHz where to move capacitor, should be used after calibration procedure completion
+
+# Configuration parameters (capctrl.h)
+ - *ConfigSpeed*: stepper speed, default is 64
+ - *ConfigStep*: number of steps for tune up/down commands, default is 100
+ - *ConfigMaxPos*: end position of capacitor, maximum number of steps, default is 5200
+ - *ConfigCalPoints*: number of calibration points, default is 10
+ - *ConfigCalAddr*: EEPROM start address where calibration data is stored, default is 0x0
