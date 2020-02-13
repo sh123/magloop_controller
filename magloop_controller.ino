@@ -52,6 +52,7 @@ String readLine()
     {
       if (newChar == '\n') 
         return result;
+      else if (newChar == '\r') {}
       else 
         result += newChar;  
     }
@@ -106,6 +107,7 @@ void loop()
       runCommand(currentCommand);
       currentCommand = String();
     }
+    else if (cmd == '\r') {}
     else 
     {
       currentCommand += cmd;  
