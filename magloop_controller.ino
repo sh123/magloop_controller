@@ -7,7 +7,7 @@
 
 String currentCommand;
 
-SoftwareSerial btCtrl(9, 10);
+SoftwareSerial btCtrl(9, 10); // our RX, TX, hc06 TX, RX
 CapCtrl capCtrl(STEPS, A2, A3, A4, A5, BTN_STOP);
 
 void setup() 
@@ -101,7 +101,7 @@ void loop()
   
   if (readChar(cmd)) 
   {
-    if (cmd == '\n') 
+    if (cmd == '\n')
     {
       runCommand(currentCommand);
       currentCommand = String();
