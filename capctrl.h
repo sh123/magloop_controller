@@ -35,10 +35,10 @@ private:
 
 private:
   const int ConfigSpeed = 64;
-  const int ConfigStep = 20;
+  const int ConfigStep = 10;
   const int ConfigMaxPos = 5200;
 
-  const int ConfigCalPoints = 10;
+  const int ConfigCalPoints = 16;
   const int ConfigCalAddr = 0x0;
 
 private:
