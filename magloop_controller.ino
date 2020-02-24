@@ -121,7 +121,7 @@ void runCalibration()
 
   println("cal:");
   
-  while (capCtrl.calMove(i++))
+  while (capCtrl.calMove(i))
   {
     println("freq?");
     
@@ -131,6 +131,8 @@ void runCalibration()
       println("ok");
     else
       println("err");
+
+    i++;
   }
   
   capCtrl.calSave();

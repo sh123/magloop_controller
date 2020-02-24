@@ -29,3 +29,5 @@ On successful command execution "ok" is returned when operation was successfully
  - *ConfigMaxPos*: end position of capacitor, maximum number of steps, default is 5200
  - *ConfigCalPoints*: number of calibration points, default is 10
  - *ConfigCalAddr*: EEPROM start address where calibration data is stored, default is 0x0
+
+![alt text](images/magloop_test.png)
