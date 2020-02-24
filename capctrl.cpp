@@ -113,7 +113,7 @@ void CapCtrl::calLoad()
 
 bool CapCtrl::calMove(int index)
 { 
-  if (index >= 0 && index <= ConfigCalPoints)
+  if (index >= 0 && index < ConfigCalPoints)
     return setPos((long)index * (long)ConfigMaxPos / ConfigCalPoints);
     
   return false;
