@@ -38,7 +38,7 @@ private:
   const int ConfigStep = 10;
   const int ConfigMaxPos = 5200;
 
-  const int ConfigCalPoints = 16;
+  const int ConfigCalPoints = 32;
   const int ConfigCalAddr = 0x0;
 
 private:
