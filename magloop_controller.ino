@@ -63,7 +63,11 @@ String readLine()
 void runCommand(const String &cmd) 
 {
   // down
-  if (cmd == "d") 
+  if (cmd == "h") 
+  {
+    Serial.println(F("u/U/d/D/p/c/<freq>"));
+  }
+  else if (cmd == "d") 
   {
     capCtrl.down();
   }
