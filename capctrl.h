@@ -18,6 +18,7 @@ public:
   ~CapCtrl();
   
   bool setFreq(long freqKhz);
+  int getPos() const { return pos_; }
 
   bool calMove(int index);
   bool calStore(int index, int freqKhz);
@@ -25,7 +26,9 @@ public:
   
   void park();
   void up();
+  void upLarge();
   void down();
+  void downLarge();
 
 private:
   bool setPos(int newPos);
@@ -36,6 +39,7 @@ private:
 private:
   const int ConfigSpeed = 64;
   const int ConfigStep = 10;
+  const int ConfigStepLarge = 100;
   const int ConfigMaxPos = 5200;
 
   const int ConfigCalPoints = 32;

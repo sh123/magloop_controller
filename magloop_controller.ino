@@ -67,8 +67,17 @@ void runCommand(const String &cmd)
   {
     capCtrl.down();
   }
+  if (cmd == "D") 
+  {
+    capCtrl.downLarge();
+  }
   // up
   else if (cmd == "u") 
+  {
+    capCtrl.up();
+  }
+  // up large
+  else if (cmd == "U") 
   {
     capCtrl.up();
   }
@@ -93,7 +102,7 @@ void runCommand(const String &cmd)
       return;
     }
   }
-  println("ok");
+  println("ok, " + capCtrl.getPos());
 }
 
 void loop()

@@ -64,8 +64,7 @@ void CapCtrl::park()
 {
   while (digitalRead(pinBtn_) == 0) 
     stepper_.step(1);
-
-  stepper_.step(-ConfigStep);
+    
   releaseMotor();
   
   pos_ = 0;
@@ -83,14 +82,34 @@ void CapCtrl::up()
 
 void CapCtrl::down()
 {
-  if (pos_ - ConfigStep >= 0) 
+  if (digitalRead(pinBtn_) == 0 && pos_ - ConfigStep >= 0) 
   {
     stepper_.step(ConfigStep);
     pos_ -= ConfigStep;
     releaseMotor();
   }
 }
-    
+
+void CapCtrl::upLarge()
+{
+  if (pos_ + ConfigStepLarge <= ConfigMaxPos)
+  {
+    stepper_.step(-ConfigStepLarge);
+    pos_ += ConfigStepLarge;
+    releaseMotor();
+  }
+}
+
+void CapCtrl::downLarge()
+{
+  if (digitalRead(pinBtn_) == 0 && pos_ - ConfigStepLarge >= 0) 
+  {
+    stepper_.step(ConfigStepLarge);
+    pos_ -= ConfigStepLarge;
+    releaseMotor();
+  }
+}
+
 void CapCtrl::releaseMotor()
 {
   digitalWrite(pin1_, LOW);  
