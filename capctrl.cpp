@@ -1,5 +1,39 @@
 #include "capctrl.h"
 
+struct CapCtrl::CalPoint CapCtrl::calPoints_[] = 
+{
+  // 30m
+  { 1620, 10100 },
+  { 1670, 10120 },
+  { 1720, 10140 },
+  // 20m
+  { 2990, 14000 },
+  { 3070, 14170 },
+  { 3150, 14350 },
+  // 17m
+  { 3640, 18068 },
+  { 3680, 18110 },
+  { 3700, 18168 },
+  // 15m
+  { 3860, 21000 },
+  { 3880, 21225 },
+  { 3900, 21450 },
+  // 12m
+  { 4360, 24890 },
+  { 4360, 24940 },
+  { 4360, 24990 },
+  // 11m
+  { 4640, 27000 },
+  { 4700, 27100 },
+  { 4800, 27300 },
+  { 4900, 27500 },
+  { 4980, 27600 },
+  // 10m
+  { 5080, 28000 },
+  { 5100, 28200 },
+  { 5200, 28500 },
+};
+
 CapCtrl::CapCtrl(int steps, int pin1, int pin2, int pin3, int pin4, int pinBtn)
   : pin1_(pin1)
   , pin2_(pin2)
@@ -8,7 +42,6 @@ CapCtrl::CapCtrl(int steps, int pin1, int pin2, int pin3, int pin4, int pinBtn)
   , pinBtn_(pinBtn)
   , pos_(0)
   , stepper_(steps, pin1, pin2, pin3, pin4)
-  , calPoints_(new CalPoint[ConfigCalPoints])
 {
   stepper_.setSpeed(ConfigSpeed);
   pinMode(pinBtn, INPUT_PULLUP);
@@ -18,7 +51,6 @@ CapCtrl::CapCtrl(int steps, int pin1, int pin2, int pin3, int pin4, int pinBtn)
 
 CapCtrl::~CapCtrl() 
 {
-  delete[] calPoints_;
 }
 
 bool CapCtrl::setPos(int newPos)
@@ -136,6 +168,27 @@ bool CapCtrl::calMove(int index)
     return setPos((long)index * (long)ConfigMaxPos / ConfigCalPoints);
     
   return false;
+}
+
+bool CapCtrl::calStore(int freqKhz)
+{
+  for (int i = 0; i < ConfigCalPoints; i++)
+  {
+    if (calPoints_[i].freqKhz == freqKhz) 
+    {
+      calPoints_[i].pos = pos_;
+      return true;
+    }
+  }
+  return false;
+}
+
+void CapCtrl::calPrint(SoftwareSerial serial) 
+{
+  for (int i = 0; i < ConfigCalPoints; i++)
+  {
+    serial.println(String(calPoints_[i].pos) + ":" + String(calPoints_[i].freqKhz));
+  }
 }
 
 bool CapCtrl::calStore(int index, int freqKhz)

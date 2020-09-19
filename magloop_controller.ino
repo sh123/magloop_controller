@@ -65,13 +65,13 @@ void runCommand(const String &cmd)
   // down
   if (cmd == "h") 
   {
-    Serial.println(F("u/U/d/D/p/c/<freq>"));
+    println(F("u/U/d/D/p/c<freq>/s/C/<freq>"));
   }
   else if (cmd == "d") 
   {
     capCtrl.down();
   }
-  if (cmd == "D") 
+  else if (cmd == "D") 
   {
     capCtrl.downLarge();
   }
@@ -83,7 +83,7 @@ void runCommand(const String &cmd)
   // up large
   else if (cmd == "U") 
   {
-    capCtrl.up();
+    capCtrl.upLarge();
   }
   // park
   else if (cmd == "p") 
@@ -91,9 +91,25 @@ void runCommand(const String &cmd)
     capCtrl.park();
   }
   // calibrate
-  else if (cmd == "c") 
+  else if (cmd[0] == 'c') 
   {
-    runCalibration();
+    String freq = cmd.substring(1);
+    if (!capCtrl.calStore(freq.toInt())) 
+    {
+      println(F("unknown freq"));
+      return;
+    }
+    capCtrl.calSave();
+  }
+  // print calibration table
+  else if (cmd == "C") 
+  {
+    capCtrl.calPrint(btCtrl);
+  }
+  // print calibration table
+  else if (cmd == "s") 
+  {
+    capCtrl.calSave();
   }
   // go to frequency
   else 
@@ -102,11 +118,11 @@ void runCommand(const String &cmd)
     
     if (!capCtrl.setFreq(freqKhz)) 
     {
-      println("err");
+      println(F("wrong freq"));
       return;
     }
   }
-  println("ok, " + capCtrl.getPos());
+  println("ok, " + String(capCtrl.getPos()));
 }
 
 void loop()
@@ -126,30 +142,4 @@ void loop()
       currentCommand += cmd;  
     }
   }
-}
-
-void runCalibration()
-{
-  int i = 0;
-
-  println("cal:");
-  
-  while (capCtrl.calMove(i))
-  {
-    println("freq?");
-    
-    int freqKhz = readLine().toInt();
-
-    if (capCtrl.calStore(i, freqKhz))
-      println("ok");
-    else
-      println("err");
-
-    i++;
-  }
-  
-  capCtrl.calSave();
-  println("done");
-  
-  capCtrl.park();
 }

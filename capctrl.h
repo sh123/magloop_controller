@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include <Stepper.h>
 #include <EEPROM.h>
+#include <SoftwareSerial.h>
 
 class CapCtrl 
 {
@@ -20,9 +21,9 @@ public:
   bool setFreq(long freqKhz);
   int getPos() const { return pos_; }
 
-  bool calMove(int index);
-  bool calStore(int index, int freqKhz);
+  bool calStore(int freqKhz);
   void calSave();
+  void calPrint(SoftwareSerial serial);
   
   void park();
   void up();
@@ -35,22 +36,24 @@ private:
   void releaseMotor();
   
   void calLoad();
+  bool calMove(int index);
+  bool calStore(int index, int freqKhz);
 
 private:
   const int ConfigSpeed = 64;
   const int ConfigStep = 10;
   const int ConfigStepLarge = 100;
-  const int ConfigMaxPos = 5200;
+  const int ConfigMaxPos = 5300;
 
-  const int ConfigCalPoints = 32;
+  const int ConfigCalPoints = 23;
   const int ConfigCalAddr = 0x0;
 
 private:
   int pos_;
   Stepper stepper_;
   int pin1_, pin2_, pin3_, pin4_, pinBtn_;
-  
-  CalPoint *calPoints_;
+
+  static CalPoint calPoints_[];
 };
 
 #endif // CAPCTRL_H
