@@ -1,5 +1,5 @@
 # Magnetic loop antenna capacitor controller
-Magnetic loop antenna capacitor KISS (keep it simple stupid) controller based on 
+Magnetic loop antenna capacitor controller based on 
  - Arduino Nano
  - L298N stepper driver
  - EM-290 stepper from Epson printer
