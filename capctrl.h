@@ -34,6 +34,7 @@ public:
 private:
   bool setPos(int newPos);
   void releaseMotor();
+  void compensate(int dir);
   
   void calLoad();
   bool calMove(int index);
@@ -43,12 +44,18 @@ private:
   const int ConfigSpeed = 64;
   const int ConfigStep = 20;
   const int ConfigStepLarge = 100;
+  const int ConfigStepCompensate = 20;
   const int ConfigMaxPos = 5200;
 
   const int ConfigCalPoints = 23;
   const int ConfigCalAddr = 0x0;
 
+  const int ConfigDirUp = 1;
+  const int ConfigDirNone = 0;
+  const int ConfigDirDn = -1;
+
 private:
+  int prevDir_;
   int pos_;
   Stepper stepper_;
   int pin1_, pin2_, pin3_, pin4_, pinBtn_;

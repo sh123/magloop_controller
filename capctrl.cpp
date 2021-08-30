@@ -35,13 +35,14 @@ struct CapCtrl::CalPoint CapCtrl::calPoints_[] =
 };
 
 CapCtrl::CapCtrl(int steps, int pin1, int pin2, int pin3, int pin4, int pinBtn)
-  : pin1_(pin1)
+  : prevDir_(ConfigDirNone)
+  , pos_(0)
+  , stepper_(steps, pin1, pin2, pin3, pin4)
+  , pin1_(pin1)
   , pin2_(pin2)
   , pin3_(pin3)
   , pin4_(pin4)
   , pinBtn_(pinBtn)
-  , pos_(0)
-  , stepper_(steps, pin1, pin2, pin3, pin4)
 {
   stepper_.setSpeed(ConfigSpeed);
   pinMode(pinBtn, INPUT_PULLUP);
@@ -57,14 +58,16 @@ bool CapCtrl::setPos(int newPos)
 {
   if (newPos < 0 || newPos > ConfigMaxPos)
     return false;
-  
-  int dir = newPos > pos_ ? 1 : -1;
+
+  stepper_.setSpeed(ConfigSpeed/2);
+  int dir = newPos > pos_ ? ConfigDirUp : ConfigDirDn;
   
   while (pos_ != newPos) 
   {
     pos_ += dir;
     stepper_.step(-dir);
   }
+  compensate(dir);
   releaseMotor();
   return true;
 }
@@ -73,7 +76,7 @@ bool CapCtrl::setFreq(long freqKhz)
 {
   if (freqKhz == 0)
     return false;
-    
+
   for (int i = 0; i < ConfigCalPoints - 1; i++) 
   {
     long freqA = calPoints_[i].freqKhz;
@@ -96,18 +99,28 @@ void CapCtrl::park()
 {
   while (digitalRead(pinBtn_) == 0) 
     stepper_.step(1);
-    
+
   releaseMotor();
   
   pos_ = 0;
 }
-  
+
+void CapCtrl::compensate(int dir) 
+{   
+  if (prevDir_ != ConfigDirNone && prevDir_ != dir) 
+  {
+    stepper_.step(-dir * ConfigStepCompensate);
+  }
+  prevDir_ = dir;
+}
+
 void CapCtrl::up()
 {
   if (pos_ + ConfigStep <= ConfigMaxPos)
   {
-    stepper_.setSpeed(ConfigSpeed/4);
+    stepper_.setSpeed(ConfigSpeed/8);
     stepper_.step(-ConfigStep);
+    compensate(ConfigDirUp);
     stepper_.setSpeed(ConfigSpeed);
     pos_ += ConfigStep;
     releaseMotor();
@@ -118,8 +131,9 @@ void CapCtrl::down()
 {
   if (digitalRead(pinBtn_) == 0 && pos_ - ConfigStep >= 0) 
   {
-    stepper_.setSpeed(ConfigSpeed/4);
+    stepper_.setSpeed(ConfigSpeed/8);
     stepper_.step(ConfigStep);
+    compensate(ConfigDirDn);
     stepper_.setSpeed(ConfigSpeed);
     pos_ -= ConfigStep;
     releaseMotor();
@@ -130,8 +144,9 @@ void CapCtrl::upLarge()
 {
   if (pos_ + ConfigStepLarge <= ConfigMaxPos)
   {
-    stepper_.setSpeed(ConfigSpeed/2);
+    stepper_.setSpeed(ConfigSpeed/4);
     stepper_.step(-ConfigStepLarge);
+    compensate(ConfigDirUp);
     stepper_.setSpeed(ConfigSpeed);
     pos_ += ConfigStepLarge;
     releaseMotor();
@@ -142,8 +157,9 @@ void CapCtrl::downLarge()
 {
   if (digitalRead(pinBtn_) == 0 && pos_ - ConfigStepLarge >= 0) 
   {
-    stepper_.setSpeed(ConfigSpeed/2);
+    stepper_.setSpeed(ConfigSpeed/4);
     stepper_.step(ConfigStepLarge);
+    compensate(ConfigDirDn);
     stepper_.setSpeed(ConfigSpeed);
     pos_ -= ConfigStepLarge;
     releaseMotor();
