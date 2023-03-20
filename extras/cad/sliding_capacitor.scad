@@ -4,7 +4,7 @@
 plate_count_ = 13;           // [3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25]
 
 // distance between rotor and stator capacitor plates in mm
-plate_distance_ = 5;         // [2, 3, 4, 5, 6, 7, 8]
+plate_distance_ = 5;         // [1, 2, 3, 4, 5, 6, 7, 8]
 
 // capacitor plate width
 plate_width_ = 55;
@@ -219,7 +219,7 @@ module capacitor_rotor_with_worm_gear(plate_count, plate_distance,
     button_pusher_height_pos = 2 * box_height + worm_gear_gap;
     button_pusher_width = plate_width / 4.0;
     button_pusher_width_center = box_width_center - button_pusher_width / 2.0;
-    button_pusher_depth = worm_gear_gap;
+    button_pusher_depth = base_plate_width;
 
     difference()
     {
