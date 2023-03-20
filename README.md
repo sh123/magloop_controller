@@ -13,7 +13,7 @@ Magnetic loop antenna capacitor controller based on
    - Capacitance range ~3-95 pF
    - Can tune from ~9 up to 29 MHz with 0.9m loop
 
-![alt text](images/magloop.png)
+![alt text](extras/images/magloop.png)
 
 # Serial commands
 On successful command execution "ok" is returned when operation was successfully completed or "err" if command was unsuccessful. Next commands are supported:
@@ -30,4 +30,4 @@ On successful command execution "ok" is returned when operation was successfully
  - *ConfigCalPoints*: number of calibration points, default is 10
  - *ConfigCalAddr*: EEPROM start address where calibration data is stored, default is 0x0
 
-![alt text](images/magloop_test.png)
+![alt text](extras/images/magloop_test.png)
