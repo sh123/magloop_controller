@@ -10,6 +10,12 @@ String currentCommand;
 SoftwareSerial btCtrl(9, 10); // our RX, TX, hc06 TX, RX
 CapCtrl capCtrl(STEPS, A2, A3, A4, A5, BTN_STOP);
 
+void println(const String &s) 
+{
+  Serial.println(s);
+  btCtrl.println(s);  
+}
+
 void setup() 
 {
   Serial.begin(115200);
@@ -18,12 +24,6 @@ void setup()
   println("CapCtrl v1.0 RDY");
 
   capCtrl.park();
-}
-
-void println(const String &s) 
-{
-  Serial.println(s);
-  btCtrl.println(s);  
 }
 
 bool readChar(char &c)
