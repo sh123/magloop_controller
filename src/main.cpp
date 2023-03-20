@@ -12,7 +12,7 @@ CapCtrl capCtrl(STEPS, A2, A3, A4, A5, BTN_STOP);
 
 void setup() 
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   btCtrl.begin(9600);
   
   println("CapCtrl v1.0 RDY");
