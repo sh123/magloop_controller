@@ -16,7 +16,7 @@ plate_depth_ = 75;
 plate_height_ = 0.6;
 
 // gap between rotor and stator, tune for smoother sliding by printing tiny capacitor first, use acetone bath!
-sliding_gap_ = 0.1;
+sliding_gap_ = 0.3;
 
 // capacitor element to generate
 generate_element_ = "stator";       // [stator, rotor]
@@ -177,7 +177,7 @@ module capacitor_stator_with_worm_gear(plate_count, plate_distance,
             rotate([-90, 0, 0])
                 union() 
                 {
-                    cylinder(plate_depth, r=worm_shaft_radius);
+                    cylinder(plate_depth, r=worm_shaft_radius + 0.2);
                     cylinder(bearing_full_depth, r=bearing_radius);
                     cylinder(screw_hole_depth, r=bearing_radius + 1);
                 }
@@ -248,7 +248,7 @@ module capacitor_rotor_with_worm_gear(plate_count, plate_distance,
         // worm gear hole
         translate([box_width_center, 0, box_height_center])
             rotate([-90, 0, 0])
-                cylinder(base_plate_width, r=worm_shaft_radius);
+                cylinder(base_plate_width, r=worm_shaft_radius + 0.2);
 
         // nut cutout
         translate([box_width_center, 0, box_height_center])
