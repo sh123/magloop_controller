@@ -4,11 +4,11 @@ Magnetic loop antenna capacitor controller based on
  - L298N stepper driver
  - EM-290 stepper from Epson printer
  - HC-06 bluetooth serial controller for remote control
- - 3d printed slide capacitor printed with PETG plastic
+ - 3d printed slide capacitor printed with PETG plastic (up to ~15kV and 130pF)
    - Plate sizes are 50x60 mm
    - Plate spacing 5 mm
    - 11 plates
-   - Worm gear is M3
+   - Worm gear is M4
    - Can handle 100W CW without arcing (tested with 0.9m loop)
    - Capacitance range ~3-95 pF
    - Can tune from ~9 up to 29 MHz with 0.9m loop
