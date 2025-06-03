@@ -10,7 +10,7 @@ Magnetic loop antenna capacitor controller based on
    - 11 plates
    - Worm gear is M4
    - Can handle 100W CW without arcing (tested with 0.9m loop)
-   - Capacitance range ~3-95 pF
+   - Capacitance range ~5-130 pF
    - Can tune from ~9 up to 29 MHz with 0.9m loop
 
 ![alt text](extras/images/magloop.png)
