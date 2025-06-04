@@ -32,4 +32,5 @@ On successful command execution "ok" is returned when operation was successfully
  - *ConfigCalPoints*: number of calibration points, default is 10
  - *ConfigCalAddr*: EEPROM start address where calibration data is stored, default is 0x0
 
+# Test magnetic loop antenna
 ![alt text](extras/images/magloop_test.png)
