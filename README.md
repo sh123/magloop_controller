@@ -17,6 +17,8 @@ Magnetic loop antenna capacitor controller based on
 
 ![alt text](extras/images/magloop.png)
 
+![alt text](extras/images/magloop2.png)
+
 # Serial commands
 On successful command execution "ok" is returned when operation was successfully completed or "err" if command was unsuccessful. Next commands are supported:
  - *p*: park to initial 0 position, automatically performed when powered on
