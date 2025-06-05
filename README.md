@@ -16,10 +16,6 @@ Magnetic loop antenna capacitor controller based on
    - Can tune ~9-29 MHz with 0.9m loop
  - Second test generated medium voltage 3d printed slide capacitor up to ~6 kV and higher 400pF capacitance
 
-![alt text](extras/images/magloop.png)
-
-![alt text](extras/images/magloop2.png)
-
 # Serial commands
 On successful command execution "ok" is returned when operation was successfully completed or "err" if command was unsuccessful. Next commands are supported:
  - *p*: park to initial 0 position, automatically performed when powered on
@@ -35,5 +31,13 @@ On successful command execution "ok" is returned when operation was successfully
  - *ConfigCalPoints*: number of calibration points, default is 10
  - *ConfigCalAddr*: EEPROM start address where calibration data is stored, default is 0x0
 
-# Test magnetic loop antenna
+# Photos
+- Large capacitor
+![alt text](extras/images/magloop.png)
+
+-  Medium size capacitor with larger capacitance
+![alt text](extras/images/magloop2.png)
+
+- Test magnetic loop antenna, ~1m diameter, ~40mm tube width
 ![alt text](extras/images/magloop_test.png)
+
