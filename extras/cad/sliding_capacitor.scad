@@ -33,10 +33,10 @@ enable_rotor_button_pusher_ = "yes";    // [yes, no]
 /* [Worm Gear Parameters] */
 
 // how much space to provide for worm gear system
-worm_gear_gap_ = 6;
+worm_gear_gap_ = 8;
 
 // worm shaft radius, change if use other than M4 shaft
-worm_shaft_radius_ = 2;     // [1, 1.5, 2, 2.5, 3]
+worm_shaft_radius_ = 2;     // [1, 1.5, 2, 2.5, 3, 3.5, 4]
 
 // bearing outer radius
 bearing_radius_ = 4;
