@@ -32,12 +32,16 @@ On successful command execution "ok" is returned when operation was successfully
  - *ConfigCalAddr*: EEPROM start address where calibration data is stored, default is 0x0
 
 # Photos
+
 - Large capacitor
+
 ![alt text](extras/images/magloop.png)
 
--  Medium size capacitor with larger capacitance
+-  Medium size capacitor with lower maximum voltage, but larger capacitance
+
 ![alt text](extras/images/magloop2.png)
 
-- Test magnetic loop antenna, ~1m diameter, ~40mm tube width
+- Test magnetic loop antenna, ~1m loop diameter, ~40mm tube diameter, fed using inductive coupling from smaller loop and 1:1 balun
+
 ![alt text](extras/images/magloop_test.png)
 
