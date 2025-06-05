@@ -11,7 +11,7 @@ Magnetic loop antenna capacitor controller based on
    - Plate spacing 5 mm
    - 14 plates
    - Worm gear is M4
-   - Can handle 100W CW without arcing (tested with 0.9m loop)
+   - Can handle 100W CW without arcing (tested with 0.9m loop) and continous 50W operation in FT8
    - Capacitance range ~5-130 pF
    - Can tune ~9-29 MHz with 0.9m loop
  - Second test generated medium voltage 3d printed slide capacitor up to ~6 kV and higher 400pF capacitance
