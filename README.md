@@ -1,6 +1,6 @@
 # Magnetic loop antenna capacitor controller
 Magnetic loop antenna capacitor controller based on 
- - OpenSCAD project to generate custom sliding variable high voltage capacitors
+ - OpenSCAD project to generate custom sliding variable high voltage capacitors with two predefined configurations
  - Arduino Nano
  - L298N stepper driver
  - EM-290 stepper from Epson printer
@@ -33,11 +33,11 @@ On successful command execution "ok" is returned when operation was successfully
 
 # Photos
 
-- Large capacitor
+- Large capacitor 15kV/130pF
 
 ![alt text](extras/images/magloop.png)
 
--  Medium size capacitor with lower maximum voltage, but larger capacitance
+-  Medium size capacitor with lower maximum voltage, but larger capacitance 6kV/400pF
 
 ![alt text](extras/images/magloop2.png)
 
