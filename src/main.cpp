@@ -106,7 +106,7 @@ void runCommand(const String &cmd)
   {
     capCtrl.calPrint(btCtrl);
   }
-  // print calibration table
+  // save calibration table
   else if (cmd == "s") 
   {
     capCtrl.calSave();
