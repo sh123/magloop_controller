@@ -44,8 +44,9 @@ private:
   const int ConfigSpeed = 64;
   const int ConfigStep = 20;
   const int ConfigStepLarge = 100;
-  const int ConfigStepCompensate = 20;
+  const int ConfigStepCompensate = 14;
   const int ConfigMaxPos = 5200;
+  const int ConfigBtnDisabled = 1;
 
   const int ConfigCalPoints = 23;
   const int ConfigCalAddr = 0x0;

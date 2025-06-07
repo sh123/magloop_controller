@@ -97,7 +97,7 @@ bool CapCtrl::setFreq(long freqKhz)
 
 void CapCtrl::park()
 {
-  while (digitalRead(pinBtn_) == 0) 
+  while (digitalRead(pinBtn_) == ConfigBtnDisabled) 
     stepper_.step(1);
 
   releaseMotor();
@@ -129,7 +129,7 @@ void CapCtrl::up()
 
 void CapCtrl::down()
 {
-  if (digitalRead(pinBtn_) == 0 && pos_ - ConfigStep >= 0) 
+  if (digitalRead(pinBtn_) == ConfigBtnDisabled && pos_ - ConfigStep >= 0) 
   {
     stepper_.setSpeed(ConfigSpeed/8);
     stepper_.step(ConfigStep);
@@ -155,7 +155,7 @@ void CapCtrl::upLarge()
 
 void CapCtrl::downLarge()
 {
-  if (digitalRead(pinBtn_) == 0 && pos_ - ConfigStepLarge >= 0) 
+  if (digitalRead(pinBtn_) == ConfigBtnDisabled && pos_ - ConfigStepLarge >= 0) 
   {
     stepper_.setSpeed(ConfigSpeed/4);
     stepper_.step(ConfigStepLarge);
