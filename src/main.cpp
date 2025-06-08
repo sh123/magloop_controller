@@ -65,7 +65,7 @@ void runCommand(const String &cmd)
   // help
   if (cmd == "h") 
   {
-    println(F("u/d/U/D/p/c<freq>/s/C/<freq>"));
+    println(F("(u/d/U/D/UU/DD/p)/(c<freq>/C/s)/<freq>"));
   }
   // down
   else if (cmd == "d") 
