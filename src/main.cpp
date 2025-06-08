@@ -62,28 +62,36 @@ String readLine()
 
 void runCommand(const String &cmd) 
 {
-  // down
+  // help
   if (cmd == "h") 
   {
-    println(F("u/U/d/D/p/c<freq>/s/C/<freq>"));
+    println(F("u/d/U/D/p/c<freq>/s/C/<freq>"));
   }
+  // down
   else if (cmd == "d") 
   {
-    capCtrl.down();
+    capCtrl.down5kHz();
   }
   else if (cmd == "D") 
   {
-    capCtrl.downLarge();
+    capCtrl.down50kHz();
+  }
+  else if (cmd == "DD") 
+  {
+    capCtrl.down500kHz();
   }
   // up
   else if (cmd == "u") 
   {
-    capCtrl.up();
+    capCtrl.up5kHz();
   }
-  // up large
   else if (cmd == "U") 
   {
-    capCtrl.upLarge();
+    capCtrl.up50kHz();
+  }
+  else if (cmd == "UU") 
+  {
+    capCtrl.up500kHz();
   }
   // park
   else if (cmd == "p") 

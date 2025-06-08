@@ -114,54 +114,58 @@ void CapCtrl::compensate(int dir)
   prevDir_ = dir;
 }
 
-void CapCtrl::up()
+void CapCtrl::up5kHz()
 {
-  if (pos_ + ConfigStep <= ConfigMaxPos)
+  up(ConfigStep5kHz, ConfigSpeed / 8);
+}
+
+void CapCtrl::down5kHz()
+{
+  down(ConfigStep5kHz, ConfigSpeed / 8);
+}
+
+void CapCtrl::up50kHz()
+{
+  up(ConfigStep50kHz, ConfigSpeed / 4);
+}
+
+void CapCtrl::down50kHz()
+{
+  down(ConfigStep50kHz, ConfigSpeed / 4);
+}
+
+void CapCtrl::up500kHz()
+{
+  up(ConfigStep500kHz, ConfigSpeed / 2);
+}
+
+void CapCtrl::down500kHz()
+{
+  down(ConfigStep500kHz, ConfigSpeed / 2);
+}
+
+void CapCtrl::up(int step, int speed)
+{
+  if (pos_ + step <= ConfigMaxPos)
   {
-    stepper_.setSpeed(ConfigSpeed/8);
-    stepper_.step(-ConfigStep);
+    stepper_.setSpeed(speed);
+    stepper_.step(-step);
     compensate(ConfigDirUp);
-    stepper_.setSpeed(ConfigSpeed);
-    pos_ += ConfigStep;
+    stepper_.setSpeed(speed);
+    pos_ += step;
     releaseMotor();
   }
 }
 
-void CapCtrl::down()
+void CapCtrl::down(int step, int speed)
 {
-  if (digitalRead(pinBtn_) == ConfigBtnDisabled && pos_ - ConfigStep >= 0) 
+  if (digitalRead(pinBtn_) == ConfigBtnDisabled && pos_ - step >= 0) 
   {
-    stepper_.setSpeed(ConfigSpeed/8);
-    stepper_.step(ConfigStep);
+    stepper_.setSpeed(speed);
+    stepper_.step(step);
     compensate(ConfigDirDn);
-    stepper_.setSpeed(ConfigSpeed);
-    pos_ -= ConfigStep;
-    releaseMotor();
-  }
-}
-
-void CapCtrl::upLarge()
-{
-  if (pos_ + ConfigStepLarge <= ConfigMaxPos)
-  {
-    stepper_.setSpeed(ConfigSpeed/4);
-    stepper_.step(-ConfigStepLarge);
-    compensate(ConfigDirUp);
-    stepper_.setSpeed(ConfigSpeed);
-    pos_ += ConfigStepLarge;
-    releaseMotor();
-  }
-}
-
-void CapCtrl::downLarge()
-{
-  if (digitalRead(pinBtn_) == ConfigBtnDisabled && pos_ - ConfigStepLarge >= 0) 
-  {
-    stepper_.setSpeed(ConfigSpeed/4);
-    stepper_.step(ConfigStepLarge);
-    compensate(ConfigDirDn);
-    stepper_.setSpeed(ConfigSpeed);
-    pos_ -= ConfigStepLarge;
+    stepper_.setSpeed(speed);
+    pos_ -= step;
     releaseMotor();
   }
 }

@@ -26,24 +26,31 @@ public:
   void calPrint(SoftwareSerial serial);
   
   void park();
-  void up();
-  void upLarge();
-  void down();
-  void downLarge();
+  
+  void up5kHz();
+  void down5kHz();
+  void up50kHz();
+  void down50kHz();
+  void up500kHz();
+  void down500kHz();
 
 private:
   bool setPos(int newPos);
   void releaseMotor();
   void compensate(int dir);
-  
+
+  void up(int step, int speed);
+  void down(int step, int speed);
+ 
   void calLoad();
   bool calMove(int index);
   bool calStore(int index, int freqKhz);
 
 private:
   const int ConfigSpeed = 64;
-  const int ConfigStep = 20;
-  const int ConfigStepLarge = 100;
+  const int ConfigStep5kHz = 2;
+  const int ConfigStep50kHz = 17;
+  const int ConfigStep500kHz = 90;
   const int ConfigStepCompensate = 14;
   const int ConfigMaxPos = 5200;
   const int ConfigBtnDisabled = 1;
