@@ -25,7 +25,7 @@ On successful command execution "ok" is returned when operation was successfully
    - *freqkhz*, frequency in kHz where to move capacitor, should be used after calibration procedure completion
  - Calibration
    - *C*: print calibration table
-   - *c<freqkhz>*: store current minimum swr position into given calibration frequency cell
+   - *c[freqkhz]*: store current minimum swr position into given calibration frequency cell
    - *s*: save calibration table
 
 # Configuration parameters (capctrl.h)
