@@ -18,18 +18,23 @@ Magnetic loop antenna capacitor controller based on
 
 # Serial commands
 On successful command execution "ok" is returned when operation was successfully completed or "err" if command was unsuccessful. Next commands are supported:
- - *p*: park to initial 0 position, automatically performed when powered on
- - *c*: start calibration procedure, each time capacitor goes into new position you need to type frequency where resonance occurs, calibration is done across 10 points and then linear interpolation is used to find position based on input frequency, calibration points are stored in EEPROM after completion and loaded when powered on
- - *u*: go/tune up to higher frequency
- - *d*: go/tune down to lower frequency
- - *number*, frequency in kHz where to move capacitor, should be used after calibration procedure completion
+ - Movements
+   - *p*: park to initial 0 position, automatically performed when powered on
+   - *u*, *U*, *UU*: go/tune up to higher frequency (5/50/500kHz steps)
+   - *d*, "D", "DD": go/tune down to lower frequency (5/50/500kHz steps)
+   - *freqkhhz*, frequency in kHz where to move capacitor, should be used after calibration procedure completion
+ - Calibration
+   - *C*: print calibration table
+   - *c<freqkhz>*: store current minimum swr position into given calibration frequency cell
+   - *s*: save calibration table
 
 # Configuration parameters (capctrl.h)
  - *ConfigSpeed*: stepper speed, default is 64
- - *ConfigStep*: number of steps for tune up/down commands, default is 20
+ - *ConfigStep(5|50|500)kHz*: number of steps for tune up/down commands for 5/50/500kHz steps
  - *ConfigMaxPos*: end position of capacitor, maximum number of steps, default is 5200
- - *ConfigCalPoints*: number of calibration points, default is 10
+ - *ConfigCalPoints*: number of calibration points, default is 23
  - *ConfigCalAddr*: EEPROM start address where calibration data is stored, default is 0x0
+ - *ConfigStepCompensate*: number of steps for reverse compensation when changing direction
 
 # Photos
 
