@@ -22,7 +22,7 @@ On successful command execution "ok" is returned when operation was successfully
    - *p*: park to initial 0 position, automatically performed when powered on
    - *u*, *U*, *UU*: go/tune up to higher frequency (5/50/500kHz steps)
    - *d*, "D", "DD": go/tune down to lower frequency (5/50/500kHz steps)
-   - *freqkhhz*, frequency in kHz where to move capacitor, should be used after calibration procedure completion
+   - *freqkhz*, frequency in kHz where to move capacitor, should be used after calibration procedure completion
  - Calibration
    - *C*: print calibration table
    - *c<freqkhz>*: store current minimum swr position into given calibration frequency cell
