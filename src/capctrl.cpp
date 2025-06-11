@@ -44,11 +44,17 @@ CapCtrl::CapCtrl(int steps, int pin1, int pin2, int pin3, int pin4, int pinBtn)
   , pin4_(pin4)
   , pinBtn_(pinBtn)
 {
+  // set default speed and button mode
   stepper_.setSpeed(ConfigSpeed);
   pinMode(pinBtn, INPUT_PULLUP);
   
-  calLoad();
-  //calSave();
+  // store default table on first time run
+  int probe = 0;
+  EEPROM.get(ConfigCalAddr, probe);
+  if (probe == -1)
+    calSave();
+  else
+    calLoad();
 }
 
 CapCtrl::~CapCtrl() 
