@@ -50,7 +50,7 @@ private:
 
 private:
   const int ConfigSpeed = 64;
-  const int ConfigStep5kHz = 4;
+  const int ConfigStep5kHz = 5; 
   const int ConfigStep50kHz = 17;
   const int ConfigStep500kHz = 90;
   const int ConfigStepCompensate = 14;

@@ -66,7 +66,7 @@ bool CapCtrl::setPos(int newPos)
   if (newPos < 0 || newPos > ConfigMaxPos)
     return false;
 
-  stepper_.setSpeed(ConfigSpeed/2);
+  stepper_.setSpeed(ConfigSpeed);
   int dir = newPos > pos_ ? ConfigDirUp : ConfigDirDn;
   
   while (pos_ != newPos) 
@@ -125,22 +125,22 @@ void CapCtrl::compensate(int dir)
 
 void CapCtrl::up5kHz()
 {
-  up(ConfigStep5kHz, ConfigSpeed / 4);
+  up(ConfigStep5kHz, ConfigSpeed);
 }
 
 void CapCtrl::down5kHz()
 {
-  down(ConfigStep5kHz, ConfigSpeed / 4);
+  down(ConfigStep5kHz, ConfigSpeed);
 }
 
 void CapCtrl::up50kHz()
 {
-  up(ConfigStep50kHz, ConfigSpeed / 2);
+  up(ConfigStep50kHz, ConfigSpeed);
 }
 
 void CapCtrl::down50kHz()
 {
-  down(ConfigStep50kHz, ConfigSpeed / 2);
+  down(ConfigStep50kHz, ConfigSpeed);
 }
 
 void CapCtrl::up500kHz()
