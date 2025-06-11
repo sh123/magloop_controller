@@ -16,7 +16,6 @@ void println(const String &s)
   btCtrl.println(s);  
 }
 
-
 void setup() 
 {
   Serial.begin(115200);
@@ -66,18 +65,18 @@ void runCommand(const String &cmd)
   // help
   if (cmd == "h") 
   {
-    println(F("(u/d/U/D/UU/DD/p)/(c<freq>/C/s)/<freq>"));
+    println(F("(u/d/uu/dd/uuu/ddd/p)/(c<freq>/t/s)/<freq>"));
   }
   // down
   else if (cmd == "d") 
   {
     capCtrl.down5kHz();
   }
-  else if (cmd == "D") 
+  else if (cmd == "dd") 
   {
     capCtrl.down50kHz();
   }
-  else if (cmd == "DD") 
+  else if (cmd == "ddd") 
   {
     capCtrl.down500kHz();
   }
@@ -86,11 +85,11 @@ void runCommand(const String &cmd)
   {
     capCtrl.up5kHz();
   }
-  else if (cmd == "U") 
+  else if (cmd == "uu") 
   {
     capCtrl.up50kHz();
   }
-  else if (cmd == "UU") 
+  else if (cmd == "uuu") 
   {
     capCtrl.up500kHz();
   }
@@ -111,7 +110,7 @@ void runCommand(const String &cmd)
     capCtrl.calSave();
   }
   // print calibration table
-  else if (cmd == "C") 
+  else if (cmd == "t") 
   {
     capCtrl.calPrint(println);
   }
