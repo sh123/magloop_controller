@@ -16,14 +16,15 @@ void println(const String &s)
   btCtrl.println(s);  
 }
 
+
 void setup() 
 {
   Serial.begin(115200);
   btCtrl.begin(9600);
   
-  println("CapCtrl v1.0 RDY");
-
+  println(F("started"));
   capCtrl.park();
+  println(F("parked"));
 }
 
 bool readChar(char &c)
@@ -112,7 +113,7 @@ void runCommand(const String &cmd)
   // print calibration table
   else if (cmd == "C") 
   {
-    capCtrl.calPrint(btCtrl);
+    capCtrl.calPrint(println);
   }
   // save calibration table
   else if (cmd == "s") 

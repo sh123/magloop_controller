@@ -6,6 +6,8 @@
 #include <EEPROM.h>
 #include <SoftwareSerial.h>
 
+typedef void (*t_print)(const String &s);
+
 class CapCtrl 
 {
   struct CalPoint 
@@ -23,7 +25,7 @@ public:
 
   bool calStore(int freqKhz);
   void calSave();
-  void calPrint(SoftwareSerial serial);
+  void calPrint(t_print print);
   
   void park();
   
@@ -48,7 +50,7 @@ private:
 
 private:
   const int ConfigSpeed = 64;
-  const int ConfigStep5kHz = 2;
+  const int ConfigStep5kHz = 4;
   const int ConfigStep50kHz = 17;
   const int ConfigStep500kHz = 90;
   const int ConfigStepCompensate = 14;

@@ -48,6 +48,7 @@ CapCtrl::CapCtrl(int steps, int pin1, int pin2, int pin3, int pin4, int pinBtn)
   pinMode(pinBtn, INPUT_PULLUP);
   
   calLoad();
+  //calSave();
 }
 
 CapCtrl::~CapCtrl() 
@@ -97,7 +98,9 @@ bool CapCtrl::setFreq(long freqKhz)
 
 void CapCtrl::park()
 {
-  while (digitalRead(pinBtn_) == ConfigBtnDisabled) 
+  stepper_.setSpeed(ConfigSpeed);
+
+  while (digitalRead(pinBtn_) == ConfigBtnDisabled)
     stepper_.step(1);
 
   releaseMotor();
@@ -116,32 +119,32 @@ void CapCtrl::compensate(int dir)
 
 void CapCtrl::up5kHz()
 {
-  up(ConfigStep5kHz, ConfigSpeed / 8);
+  up(ConfigStep5kHz, ConfigSpeed / 4);
 }
 
 void CapCtrl::down5kHz()
 {
-  down(ConfigStep5kHz, ConfigSpeed / 8);
+  down(ConfigStep5kHz, ConfigSpeed / 4);
 }
 
 void CapCtrl::up50kHz()
 {
-  up(ConfigStep50kHz, ConfigSpeed / 4);
+  up(ConfigStep50kHz, ConfigSpeed / 2);
 }
 
 void CapCtrl::down50kHz()
 {
-  down(ConfigStep50kHz, ConfigSpeed / 4);
+  down(ConfigStep50kHz, ConfigSpeed / 2);
 }
 
 void CapCtrl::up500kHz()
 {
-  up(ConfigStep500kHz, ConfigSpeed / 2);
+  up(ConfigStep500kHz, ConfigSpeed);
 }
 
 void CapCtrl::down500kHz()
 {
-  down(ConfigStep500kHz, ConfigSpeed / 2);
+  down(ConfigStep500kHz, ConfigSpeed);
 }
 
 void CapCtrl::up(int step, int speed)
@@ -211,11 +214,11 @@ bool CapCtrl::calStore(int freqKhz)
   return false;
 }
 
-void CapCtrl::calPrint(SoftwareSerial serial) 
+void CapCtrl::calPrint(t_print print) 
 {
   for (int i = 0; i < ConfigCalPoints; i++)
   {
-    serial.println(String(calPoints_[i].pos) + ":" + String(calPoints_[i].freqKhz));
+    print(String(calPoints_[i].pos) + ":" + String(calPoints_[i].freqKhz));
   }
 }
 
