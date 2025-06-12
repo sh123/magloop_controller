@@ -20,8 +20,8 @@ Magnetic loop antenna capacitor controller based on
 On successful command execution "ok" is returned when operation was successfully completed or "err" if command was unsuccessful. Next commands are supported:
  - Movements
    - *p*: park to initial 0 position, automatically performed when powered on
-   - *u*, *u*, *uuu*: go/tune up to higher frequency (5/50/500kHz steps)
-   - *d*, "d", "dd": go/tune down to lower frequency (5/50/500kHz steps)
+   - *u*, *uu*, *uuu*: go/tune up to higher frequency (5/50/500kHz steps)
+   - *d*, *dd*, *ddd*: go/tune down to lower frequency (5/50/500kHz steps)
    - *freqkhz*, frequency in kHz where to move capacitor, should be used after calibration procedure completion
  - Calibration
    - *t*: print calibration table
